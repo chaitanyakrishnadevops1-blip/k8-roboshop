@@ -9,7 +9,11 @@ metadata:
 spec:
   containers:
     - name: nginx
-      image: chaitanyakrishnadevops1/debug:v1
+      image: krishnachaitanyadevops1/debug:v1
       ports: 
       - containerport: 80 
+
+
+
+      
  
