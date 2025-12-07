@@ -4,14 +4,13 @@ metadata:
   name: debug
   namespace: roboshop
   labels:
-     name: debug 
-     project: roboshop 
+    name: debug
+    project: roboshop
 spec:
   containers:
-    - name: debug
-      image: krishnachaitanyadevops1/debug:v1
-      ports: 
-        - containerPort: 80
+  - name: debug
+    image: krishnachaitanyadevops1/debug:v1
+    imagePullPolicy: Always
 
 
 
