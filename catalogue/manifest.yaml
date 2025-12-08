@@ -72,6 +72,10 @@ spec:
       targetPort: 8080 # container port
 
 
+
+
+
+
       
 
 
