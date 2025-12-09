@@ -6,22 +6,13 @@ metadata:
 data:
   CART_ENDPOINT: "cart:8080"
   DB_HOST: "mysql"
-  DB_USER: "shipping"
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: shipping-secret
-  namespace: roboshop
-type: Opaque
-stringData:
-  DB_PASS: "RoboShop@1"
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shipping
   namespace: roboshop
+  # these are replica set labels
   labels:
     project: roboshop
     component: shipping
@@ -29,10 +20,12 @@ metadata:
 spec:
   replicas: 1
   selector:
+    # these labels are used to select pods
     matchLabels:
       project: roboshop
       component: shipping
       tier: backend
+  # pod definition
   template:
     metadata:
       labels:
@@ -42,17 +35,11 @@ spec:
     spec:
       containers:
       - name: shipping
-        image: krishnachaitanyadevops1/shipping:v1
+        image: joindevops/shipping:v1
         imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: shipping
-        env:
-        - name: DB_PASS
-          valueFrom:
-            secretKeyRef:
-              name: shipping-secret
-              key: DB_PASS
         ports:
         - name: liveness-port
           containerPort: 8080
@@ -81,5 +68,5 @@ spec:
     tier: backend
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8080 # service port
+      targetPort: 8080 # container port
